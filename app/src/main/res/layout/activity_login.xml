@@ -77,4 +77,14 @@
         android:clickable="true"
         android:onClick="registration_bypass"/>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_below="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+    </ProgressBar>
+
+
 </RelativeLayout>

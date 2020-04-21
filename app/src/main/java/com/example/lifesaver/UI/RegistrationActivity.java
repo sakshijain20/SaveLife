@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.lifesaver.MainActivity;
@@ -25,6 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText edt_name,edt_password,edt_number,edt_secondary_number;
     Button btn_register;
     String name,password,secondary_number,number;
+    ProgressBar progressBar;
     FirebaseDatabase database;
     DatabaseReference dbReference;
 
@@ -38,6 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
         edt_secondary_number = (EditText) findViewById(R.id.edt_secondary_number);
         edt_password = (EditText) findViewById(R.id.edt_password);
         btn_register = (Button)findViewById(R.id.btn_register);
+        progressBar = (ProgressBar)findViewById(R.id.progress_bar);
 
     }
 
@@ -66,11 +69,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
     //Check if registration is successful or not
     public void check_registration_status(View view) {
+        progressBar.setVisibility(View.VISIBLE);
 
         name=edt_name.getText().toString().trim();
         password=edt_password.getText().toString().trim();
         number=edt_number.getText().toString().trim();
         secondary_number=edt_secondary_number.getText().toString().trim();
+
 
         //Required fields are available
         if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(number)){
@@ -119,7 +124,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     private void register_user(DemoDataClass demo) {
-
+        progressBar.setVisibility(View.GONE);
         dbReference.child(number).setValue(demo, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

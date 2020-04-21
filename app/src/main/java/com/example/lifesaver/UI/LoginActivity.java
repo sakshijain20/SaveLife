@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText edt_phone,edt_password;
     Button btn_login;
+    ProgressBar progressBar;
     TextView registration_activity_bypass;
 
     @Override
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         edt_password = (EditText) findViewById(R.id.edt_password);
         btn_login = (Button) findViewById(R.id.btn_login);
         registration_activity_bypass = (TextView) findViewById(R.id.registration_activity_bypass);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
     }
 
@@ -62,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
    //Check whether log in is successful or not
     public void check_login_status(View view) {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
 }

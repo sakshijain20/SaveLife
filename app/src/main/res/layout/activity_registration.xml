@@ -109,6 +109,16 @@
         android:layout_centerHorizontal="true"
         android:onClick="check_registration_status"/>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_below="@+id/btn_register"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+    </ProgressBar>
+
+
 
 
 
