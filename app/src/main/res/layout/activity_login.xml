@@ -13,7 +13,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="OTP"
+        android:hint="Password"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -43,6 +43,7 @@
         android:textColorHint="@color/colorAccent"
         app:boxStrokeColor="@color/colorAccent"
         app:errorEnabled="true"
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -61,6 +62,7 @@
         android:text="login"
         android:layout_below="@+id/textFieldPassword"
         android:layout_centerHorizontal="true"
+        android:onClick="check_login_status"
         />
 
     <TextView
@@ -71,6 +73,8 @@
         android:text="Create new account!!"
         android:layout_below="@+id/btn_login"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/colorAccent"
+        android:clickable="true"
+        android:onClick="registration_bypass"/>
 
 </RelativeLayout>
