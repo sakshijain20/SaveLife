@@ -1,5 +1,6 @@
 package com.example.lifesaver.UI;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,6 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lifesaver.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -66,6 +72,33 @@ public class LoginActivity extends AppCompatActivity {
    //Check whether log in is successful or not
     public void check_login_status(View view) {
         progressBar.setVisibility(View.VISIBLE);
+        DatabaseReference postRef;
+        String number = edt_phone.getText().toString();
+        String password = edt_password.getText().toString();
+        postRef = FirebaseDatabase.getInstance().getReference("Users").child(number);
+
+
+        postRef.orderByChild("password").equalTo(password)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            Toast.makeText(LoginActivity.this, "Number exist", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "No number found", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(LoginActivity.this, "Error h bc", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+
+
     }
 
 }

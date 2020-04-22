@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Maps.MapsActivity"></activity>
-        <activity android:name=".UI.RegistrationActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".UI.LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".UI.RegistrationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

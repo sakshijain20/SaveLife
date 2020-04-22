@@ -15,6 +15,5 @@ public class DemoDataClass {
     public DemoDataClass(String name, String password) {
         this.name = name;
         this.password = password;
-
     }
 }
