@@ -78,7 +78,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
         //Required fields are available
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(number)){
+        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(number) && number.length() == 10){
 
             database=FirebaseDatabase.getInstance();
             dbReference=database.getReference("Users");
@@ -99,6 +99,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         //If any required field data is missing
         else{
+            progressBar.setVisibility(View.GONE);
             if(TextUtils.isEmpty(name)){
                 edt_name.setError("Name is required!");
                 edt_name.requestFocus();
@@ -112,6 +113,11 @@ public class RegistrationActivity extends AppCompatActivity {
             if(TextUtils.isEmpty(number)){
                 edt_name.setError("Number is required!");
                 edt_name.requestFocus();
+            }
+
+            if(number.length()!=10){
+                edt_number.setError("Please enter a valid number!");
+                edt_number.requestFocus();
             }
 
             else{
