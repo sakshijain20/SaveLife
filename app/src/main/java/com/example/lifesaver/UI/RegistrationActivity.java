@@ -86,12 +86,12 @@ public class RegistrationActivity extends AppCompatActivity {
             //Secondary number not provided
             if(TextUtils.isEmpty(secondary_number)){
                 DemoDataClass demo=new DemoDataClass(name,password);
-                register_user(demo);
+                register_user(demo, number);
             }
             //secondary number provided
             else{
                 DemoDataClass demo=new DemoDataClass(name,password,secondary_number);
-                register_user(demo);
+                register_user(demo,number);
 
             }
 
@@ -123,9 +123,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
 
-    private void register_user(DemoDataClass demo) {
+    private void register_user(DemoDataClass demo, String number) {
         progressBar.setVisibility(View.GONE);
-        dbReference.child(number).setValue(demo, new DatabaseReference.CompletionListener() {
+        dbReference.child(this.number).push().setValue(demo, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 if(databaseError!=null){

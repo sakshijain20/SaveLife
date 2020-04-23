@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lifesaver.MainActivity;
 import com.example.lifesaver.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -83,17 +84,24 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        progressBar.setVisibility(View.GONE);
                         if (dataSnapshot.exists()) {
-                            Toast.makeText(LoginActivity.this, "Number exist", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, "Number exist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Log in successful..", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
                         }
                         else {
-                            Toast.makeText(LoginActivity.this, "No number found", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginActivity.this, "No number found", Toast.LENGTH_SHORT).show();
+                            edt_password.setError("Password incorrect!! ");
+                            edt_password.requestFocus();
+
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(LoginActivity.this, "Error h bc", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Error!! ", Toast.LENGTH_SHORT).show();
                     }
 
                 });
