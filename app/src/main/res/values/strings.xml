@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LifeSaver</string>
+    <string name="get_location">get location</string>
 </resources>
