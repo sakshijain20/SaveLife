@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     LocationManager locationManager;
     Location location;
     Boolean isGpsEnabled = false;
+    String provider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         btn_displayAddress = (Button) findViewById(R.id.btn_displayAddress);
         txt_address = (TextView) findViewById(R.id.txt_address);
+        provider = LocationManager.GPS_PROVIDER;
 
     }
 
@@ -68,31 +70,39 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        if (isGpsEnabled) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                Log.d("gpsTracker","Does not match the requirements");
-
-                return;
-            }
-
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            if(location != null)
+        try{
+            Log.d("gpsTracker","In try block");
+            if(isGpsEnabled)
             {
-                Log.d("gpsTracker","Success");
-                txt_address.setText(" Latitude = " +location.getLatitude() + "\n Longitude = " +location.getLongitude());
+                String provider = LocationManager.GPS_PROVIDER;
+                location=new Location(provider);
+
+                Log.d("gpsTracker","Location provided");
+
+                location = locationManager.getLastKnownLocation(provider);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
+                
+                Log.d("gpsTracker","after request");
+                if(location==null)
+                {
+                    Log.d("gpsTracker","Location is null!");
+                }
+                else{
+                    Double latitude= location.getLatitude();
+                    Double longitude = location.getLongitude();
+                    txt_address.setText("Latitude = " +latitude + "\nLongitude = " +longitude);
+                }
+
             }
             else{
-                Log.d("gpsTracker","Location is null");
-                Toast.makeText(this, "Location is null", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Make sure your GPS is on..!", Toast.LENGTH_SHORT).show();
             }
-
-
         }
-        else{
-            Toast.makeText(this, "Make sure your GPS is on..!", Toast.LENGTH_SHORT).show();
+        catch(SecurityException e)
+        {
+            Log.d("gpsTracker","In catch block");
+            e.printStackTrace();
         }
-
-
 
 
     }
