@@ -19,14 +19,16 @@ import android.widget.Toast;
 import com.example.lifesaver.UI.LoginActivity;
 public class MainActivity extends AppCompatActivity{
 
-    Intent intent = getIntent();
-    Bundle extras = intent.getExtras();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
         double latitude = extras.getDouble("latitude");
         double longitude = extras.getDouble("longitude");
         Toast.makeText(getApplicationContext(),"Latitude = " +latitude+ "\nLongitude = " +longitude,Toast.LENGTH_SHORT).show();
