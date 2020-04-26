@@ -46,6 +46,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_PERMISSION_REQUEST_CODE=1;
+    Bundle extras=new Bundle();
 
 
     @Override
@@ -178,7 +179,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "User registered successfully!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("latitude",location.getLatitude());
+                    intent.putExtra("longitude",location.getLongitude());
+                    startActivity(intent);
                 }
             }
         });
